@@ -29,7 +29,7 @@ if u:
     sessao.cartao_lateral(u)
 # Perfis e custos: só admin. Antes de existir qualquer admin, qualquer pessoa
 # com acesso à app pode fazer a configuração inicial.
-pode_gerir = bool(u and u.admin) or not sessao.existe_admin(membros)
+pode_gerir = bool(u and u.admin) or data.utilizador_atual().strip().lower() in sessao._admins_secrets() or not sessao.existe_admin(membros)
 if not sessao.existe_admin(membros):
     st.info(
         "Ainda não há administradores. Ao criar os membros, atribui o perfil «admin» "
